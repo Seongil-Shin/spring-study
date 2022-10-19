@@ -30,6 +30,7 @@ public class SpringMemberControllerV3 {
         return "members";
     }
 
+    // @RequestMapping(value = "/save", method = RequestMethod.POST)
     @PostMapping(value = "/save")
     public String save(
             @RequestParam("username") String username,
