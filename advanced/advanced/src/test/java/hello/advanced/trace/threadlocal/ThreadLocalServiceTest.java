@@ -1,0 +1,44 @@
+package hello.advanced.trace.threadlocal;
+
+import hello.advanced.trace.threadlocal.code.ThreadLocalService;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
+/**
+ * FieldServiceTest
+ */
+@Slf4j
+public class ThreadLocalServiceTest {
+	private ThreadLocalService fieldService = new ThreadLocalService();
+
+	@Test
+	void field() {
+		log.info("main start");
+		Runnable runnable = () -> {
+			fieldService.logic("hello");
+		};
+		Runnable runnable2 = () -> {
+			fieldService.logic("hello2");
+		};
+
+		Thread threadA = new Thread(runnable);
+		threadA.setName("thread-A");
+		Thread threadB = new Thread(runnable2);
+		threadB.setName("thread-B");
+
+		threadA.start();
+//		sleep(2000); // 동시성 문제 발생 X
+		sleep(100); // 동시성 문제 발생
+		threadB.start();
+		sleep(3000);
+		log.info("main exit");
+	}
+
+	private void sleep(int millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+}

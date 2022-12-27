@@ -2,6 +2,7 @@ package hello.advanced.trace.hellotrace;
 
 import static org.junit.jupiter.api.Assertions.*;
 import hello.advanced.trace.TraceStatus;
+import hello.advanced.trace.hellotrace.HelloTraceV1;
 import org.junit.jupiter.api.Test;
 
 /**
